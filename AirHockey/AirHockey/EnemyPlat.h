@@ -10,8 +10,6 @@ public:
 	void Move() override;
 
 	//Change drawing of the platform
-	void Push() override;
+	void push() override;
 
-	//Visualization of the platform
-	void Draw() override;
 };

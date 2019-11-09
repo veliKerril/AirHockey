@@ -21,10 +21,10 @@ public:
 	void setY(double);
 
 	//Change drawing of the ball
-	void Push();
+	void push();
 
 	//Visualization of the ball
-	void Draw();
+	void draw(UTFT&);
 
 	//Estimation of the ball's trajectory after interection
 	//with MyPlat

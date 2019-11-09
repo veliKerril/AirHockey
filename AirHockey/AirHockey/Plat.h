@@ -25,14 +25,14 @@ public:
 	double getY() const;
 
 	//Set the current x of the platform
-	void setX(double);
+	void setX(const TSPoint);
 
 	//Set the current y of the platform
-	void setY(double);
+	void setY(const TSPoint);
 
 	//Change drawing of the platform
-	virtual void Push();
+	virtual void push(const TSPoint p, UTFT& myGLCD);
 
 	//Visualization of the platform
-	virtual void Draw();
+	void draw(UTFT&);
 };

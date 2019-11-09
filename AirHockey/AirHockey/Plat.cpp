@@ -16,20 +16,19 @@ double Plat::getY() const {
 	return this->y;
 }
 
-void Plat::setX(double x) {
-	this->x = x;
+//Считываю координаты прикосания и назначаю их текущим координатам
+void Plat::setX(const TSPoint p) {
+	this->x = p.x;
+}
+void Plat::setY(const TSPoint p) {
+	/*добавить условие выхода*/
+	this->x = p.y;
 }
 
-void Plat::setY(double y) {
-	this->x = y;
-}
+//Реализация в другом файле
+void Plat::push(const TSPoint p, UTFT& myGLCD) {}
 
-//Как изменять рисовку платформы?
-void Plat::Push() {
-	/*В этой функции всегда вызываем Draw и запускаем ее каждую иттерацию*/
-}
-
-//Как я буду отрисовывать платформу?
-void Plat::Draw() {
-
+//Draw the rect for plat
+void Plat::draw(UTFT& myGLCD) {
+	myGLCD.drawRect(x - 5, y - 2, x + 5, y + 2);
 }

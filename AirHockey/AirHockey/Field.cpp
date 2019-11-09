@@ -1,11 +1,11 @@
 #include "Field.h"
 
 //Как я буду проявлять эту отрисовку?
-void Field::Push() {
+void Field::push() {
 	/*Вызываем один раз в самом начале и не выключаем*/
 }
 
 //Как я буду отрисовывать поле?
-void Field::Draw() {
+void Field::draw(UTFT& myGLCD) {
 	/*Отрисовка полей поля*/
 }

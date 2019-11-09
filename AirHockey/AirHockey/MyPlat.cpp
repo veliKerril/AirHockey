@@ -11,11 +11,8 @@ void MyPlat::Move() {
 }
 
 //Как отрисовать это?
-void MyPlat::Push() {
-	/*В этой функции всегда вызываем Draw и запускаем ее каждую иттерацию*/
-}
-
-//Как изобразить мою платформу?
-void MyPlat::Draw() {
-	/*В зависимости от x и y рисуем платформу*/
+void MyPlat::push(const TSPoint p, UTFT& myGLCD) {
+	this->setX(p);
+	this->setY(p);
+	this->draw(myGLCD);
 }

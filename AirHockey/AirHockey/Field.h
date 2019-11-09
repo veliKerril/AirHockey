@@ -3,8 +3,8 @@
 class Field {
 public:
 	//Change drawing of the field
-	void Push();
+	void push();
 
 	//Visualization of the field
-	void Draw();
+	void draw(UTFT&);
 };
