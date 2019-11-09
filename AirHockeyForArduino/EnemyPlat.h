@@ -9,9 +9,9 @@ public:
 	EnemyPlat();
 
 	//Responsible for moving enemy platform
-	void Move() override;
+	void Move();
 
 	//Change drawing of the platform
-	void push(const TSPoint p, UTFT& myGLCD) override;
+	void push(UTFT& myGLCD);
 
 };

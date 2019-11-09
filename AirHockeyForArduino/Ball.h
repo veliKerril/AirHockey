@@ -1,4 +1,6 @@
 #pragma once
+#include "MyPlat.h"
+#include "EnemyPlat.h"
 #include <UTFT.h>
 #include <TouchScreen.h>
 
@@ -23,14 +25,14 @@ public:
 	void setY(double);
 
 	//Change drawing of the ball
-	void push(UTFT&);
+	void push(UTFT&, const MyPlat&, const EnemyPlat&);
 
 	//Visualization of the ball
 	void draw(UTFT&);
 
 	//Estimation of the ball's trajectory after interection
 	//with MyPlat
-	void tr();
+	void tr(const MyPlat&, const EnemyPlat&);
 
 	//The start position of the ball in the start of game
 	//or after missing ball by player

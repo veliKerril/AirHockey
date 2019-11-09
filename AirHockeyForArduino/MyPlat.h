@@ -9,9 +9,9 @@ public:
 	MyPlat();
 
 	//Responsible for moving my platform
-	void Move() override;
+	void Move();
 
 	//Change drawing of the platform
-	void push(const TSPoint p, UTFT& myGLCD) override;
+	void push(const TSPoint p, UTFT& myGLCD);
 
 };

@@ -10,6 +10,8 @@ void EnemyPlat::Move() {
 
 }
 
-void EnemyPlat::push(const TSPoint p, UTFT& myGLCD) {
-	
+void EnemyPlat::push(UTFT& myGLCD) {
+	this->x = 300;
+  this->y = 120;
+  this->draw(myGLCD);
 }

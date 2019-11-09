@@ -17,9 +17,6 @@ public:
 	//Start platform's parameters
 	Plat();
 
-	//Responsible for moving the platform
-	virtual void Move();
-
 	//Get the current x of the platform
 	double getX() const;
 
@@ -31,9 +28,6 @@ public:
 
 	//Set the current y of the platform
 	void setY(const TSPoint);
-
-	//Change drawing of the platform
-	virtual void push(const TSPoint p, UTFT& myGLCD);
 
 	//Visualization of the platform
 	void draw(UTFT&);

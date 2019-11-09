@@ -11,7 +11,7 @@ void MyPlat::Move() {
 }
 
 void MyPlat::push(const TSPoint p, UTFT& myGLCD) {
-	this->setX(p.x);
-	this->setY(p.y);
+	this->setX(p);
+	this->setY(p);
 	this->draw(myGLCD);
 }

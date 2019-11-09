@@ -2,13 +2,7 @@
 #include <UTFT.h>
 #include <TouchScreen.h>
 
-//��������� �������� ���������
 Plat::Plat() {}
-
-//��� ����������� ��������� �������� ������ � ��������?
-void Plat::Move() {
-
-}
 
 double Plat::getX() const{
 	return this->x;
@@ -19,16 +13,18 @@ double Plat::getY() const {
 }
 
 void Plat::setX(const TSPoint p) {
-	this->x = p.x;
+	this->x = p.x + 100;
 }
 void Plat::setY(const TSPoint p) {
 	/*Check deadline*/
-	this->x = p.y;
+	this->y = -p.y;
 }
-
-void Plat::push(const TSPoint p, UTFT& myGLCD) {}
 
 //Draw the rect for plat
 void Plat::draw(UTFT& myGLCD) {
-	myGLCD.drawRect(x - 5, y - 2, x + 5, y + 2);
+	myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
+  delay(20);
+  myGLCD.setColor(0, 0, 0);
+  myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
+  myGLCD.setColor(255, 255, 255);
 }

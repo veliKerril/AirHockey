@@ -1,4 +1,7 @@
+
 #include "Ball.h"
+#include "MyPlat.h"
+#include "EnemyPlat.h"
 #include <UTFT.h>
 #include <TouchScreen.h>
 
@@ -22,17 +25,26 @@ void Ball::setY(double y) {
 	this->x = y;
 }
 
-void Ball::push(UTFT& myGLCD) {
+void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
+  this->tr(myPlat, enemyPlat);
 	this->draw(myGLCD);
 }
 
 void Ball::draw(UTFT& myGLCD) {
-	myGLCD.fillCircle(this->x, this->y, 8);
+	myGLCD.fillCircle(this->x, this->y, 5);
+  myGLCD.setColor(0, 0, 0);
+  delay(20);
+  myGLCD.fillCircle(this->x, this->y, 5);
+  myGLCD.setColor(255, 255, 255);
 }
 
 
-void Ball::tr() {
-	/*Define new x and y*/
+void Ball::tr(const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
+	if ((this->x - 5) <=  (myPlat.getX() + 2)){
+    this->x += 2;
+	} else if ((this->x + 5) >=  (enemyPlat.getX() - 2)) {
+    this->x -= 2;
+	}
 }
 
 void Ball::startMy() {
