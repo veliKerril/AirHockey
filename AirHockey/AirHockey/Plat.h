@@ -19,16 +19,16 @@ public:
 	virtual void Move();
 
 	//Get the current x of the platform
-	virtual const double GetX();
+	double getX() const;
 
 	//Get the current y of the platform
-	virtual const double GetY();
+	double getY() const;
 
 	//Set the current x of the platform
-	virtual void SetX();
+	void setX(double);
 
 	//Set the current y of the platform
-	virtual void SetY();
+	void setY(double);
 
 	//Change drawing of the platform
 	virtual void Push();

@@ -12,13 +12,13 @@ public:
 	//Set start parametrs of the ball
 	Ball();
 
-	const double getX();
+	double getX() const;
 
-	const double getY();
+	double getY() const;
 
-	void setX();
+	void setX(double);
 
-	void setY();
+	void setY(double);
 
 	//Change drawing of the ball
 	void Push();

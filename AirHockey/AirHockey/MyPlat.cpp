@@ -5,22 +5,6 @@ MyPlat::MyPlat() {
 
 }
 
-const double MyPlat::GetX() {
-	
-}
-
-const double MyPlat::GetY() {
-	
-}
-
-void MyPlat::SetX() {
-
-}
-
-void MyPlat::SetY() {
-
-}
-
 //Как обработать движение платформы?
 void MyPlat::Move() {
 

@@ -1,29 +1,27 @@
 #include "Plat.h"
 
 //Начальные значения платформы
-Plat::Plat() {
-
-}
+Plat::Plat() {}
 
 //Как реализовать обработку входящих данных о движении?
 void Plat::Move() {
 
 }
 
-const double Plat::GetX() {
+double Plat::getX() const{
 	return this->x;
 }
 
-const double Plat::GetY() {
+double Plat::getY() const {
 	return this->y;
 }
 
-void Plat::SetX() {
-
+void Plat::setX(double x) {
+	this->x = x;
 }
 
-void Plat::SetY() {
-
+void Plat::setY(double y) {
+	this->x = y;
 }
 
 //Как изменять рисовку платформы?

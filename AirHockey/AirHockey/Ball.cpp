@@ -5,20 +5,20 @@ Ball::Ball() {
 
 }
 
-const double Ball::getX() {
-	
+double Ball::getX() const {
+	return this->x;
 }
 
-const double Ball::getY() {
-	
+ double Ball::getY() const {
+	return this->y;
 }
 
-void Ball::setX() {
-
+void Ball::setX(double x) {
+	this->x = x;
 }
 
-void Ball::setY() {
-
+void Ball::setY(double y) {
+	this->x = y;
 }
 
 //Как я буду изменять рисовку мяча?
