@@ -10,8 +10,8 @@ private:
 	double y;
   int up = 1;
   int right = 1;
-  int MyPoint = 0;
-  int EnemyPoint = 0;
+  int myPoint = 0;
+  int enemyPoint = 0;
 
 public:
 	Ball();
@@ -19,6 +19,10 @@ public:
 	double getY() const;
 	void setX(double);
 	void setY(double);
+  void setMyPoint(int);
+  void setEnemyPoint(int);
+  int getMyPoint() const;
+  int getEnemyPoint() const;
 	void push(UTFT&, const MyPlat&, const EnemyPlat&);
 	void draw(UTFT&);
 	void tr(const MyPlat&, const EnemyPlat&);

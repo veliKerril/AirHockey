@@ -69,10 +69,13 @@ void loop(){
     //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
     pinMode(YP, OUTPUT);
 
-    field.push(myGLCD);
+    field.push(myGLCD, ball);
     myPlat.push(p, myGLCD);
     enemyPlat.push(myGLCD);
     ball.push(myGLCD, myPlat, enemyPlat);
+    Serial.println(ball.getEnemyPoint());
+    Serial.println(' ');
+    Serial.println(ball.getMyPoint());
 }
 
 /*myGLCD.setColor(255, 255, 255);
