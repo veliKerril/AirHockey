@@ -15,5 +15,9 @@ public:
 	void setY(const TSPoint);
   void setX(double);
   void setY(double);
+  void setXplus();
+  void setXminus();
+  void setYplus();
+  void setYminus();
 	void draw(UTFT&);
 };

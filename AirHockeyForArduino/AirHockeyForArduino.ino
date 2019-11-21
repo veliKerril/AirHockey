@@ -47,14 +47,6 @@ void setup(void){
     Serial.begin(9600);                                    // Инициируем передачу данных в монитор последовательного порта на скорости 9600 бит/сек
     myGLCD.InitLCD();                                      // Инициируем работу с TFT дисплеем    
     myGLCD.clrScr();                                       // Чистим экран дисплея
-    /*myGLCD.setColor(175, 175, 175);
-    myGLCD.fillRect(50, 0, 319, 4);
-    myGLCD.fillRect(50, 5, 54, 75);
-    myGLCD.fillRect(50, 160, 54, 235);
-    myGLCD.fillRect(50, 236, 319, 240);
-    myGLCD.fillRect(316, 5, 319, 75);
-    myGLCD.fillRect(316, 160, 319, 235);
-    myGLCD.setColor(255, 255, 255);*/
 }
 
   
@@ -73,9 +65,6 @@ void loop(){
     myPlat.push(p, myGLCD);
     enemyPlat.push(myGLCD);
     ball.push(myGLCD, myPlat, enemyPlat);
-    Serial.println(ball.getEnemyPoint());
-    Serial.println(' ');
-    Serial.println(ball.getMyPoint());
 }
 
 /*myGLCD.setColor(255, 255, 255);

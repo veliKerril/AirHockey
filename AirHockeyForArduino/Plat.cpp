@@ -26,6 +26,23 @@ void Plat::setY(double y) {
   this->y = y;
 }
 
+void Plat::setXplus() {
+  this->x += 15;
+}
+
+void Plat::setXminus() {
+  this->x -= 15;
+}
+
+void Plat::setYplus() {
+  this->y += 15;
+}
+
+void Plat::setYminus() {
+  this->y -= 15;
+}
+
+
 void Plat::draw(UTFT& myGLCD) {
 	myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
   delay(10);

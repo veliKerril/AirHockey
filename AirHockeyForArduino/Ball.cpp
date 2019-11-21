@@ -42,8 +42,10 @@ void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat) 
 
 
 void Ball::tr(const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
-	if ((((x - 15) <=  (myPlat.getX() + 2)) && (y <=  myPlat.getY() + 20) && (y >=  myPlat.getY() - 20) && ((x + 15) >=  (myPlat.getX() - 2)))
-	    || ((x + 15) >=  (enemyPlat.getX() - 2)) || (((x - 5) <= 55) && ((y >= 160)||(y <= 75)))) {
+	if (   (((x - 15) <=  (myPlat.getX() + 2)) && ((x + 15) >=  (myPlat.getX() - 2)) && (y <=  myPlat.getY() + 20) && (y >=  myPlat.getY() - 20)) // от моей платформы
+	    || (((x - 5) <= 55) && ((y >= 160)||(y <= 75))) // от моего дна
+	    || ((x + 15) >=  (enemyPlat.getX() - 2) && ((x - 15) <=  (enemyPlat.getX() + 2)) && (y <= enemyPlat.getY() + 20) && (y >= enemyPlat.getY() - 20)) // от вражеской платформы
+	    || (((x + 5) >= 315) && ((y >= 160)||(y <= 75)))) { //от вражеского дна
     up = (up + 1) % 2;
 	} 
 

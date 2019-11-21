@@ -15,6 +15,10 @@ void Field::draw(UTFT& myGLCD) {
     myGLCD.fillRect(316, 5, 319, 75);
     myGLCD.fillRect(316, 160, 319, 235);
     myGLCD.fillRect(184, 5, 186, 235);
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect(312, 76, 319, 159);
+    myGLCD.fillRect(310, 5, 315, 234);
+    myGLCD.setColor(255, 255, 255);
 }
 
 void Field::count(UTFT& myGLCD, Ball& ball) {
@@ -57,25 +61,25 @@ void Field::count(UTFT& myGLCD, Ball& ball) {
   } else if (ball.getMyPoint() == 3) {
     myGLCD.fillCircle(179, 230, 2);
     myGLCD.fillCircle(169, 230, 2);
-    myGLCD.fillCircle(179, 225, 2); 
+    myGLCD.fillCircle(179, 220, 2); 
   } else if (ball.getMyPoint() == 4) {
     myGLCD.fillCircle(179, 230, 2);
     myGLCD.fillCircle(169, 230, 2);
-    myGLCD.fillCircle(179, 225, 2);
-    myGLCD.fillCircle(169, 225, 2);
+    myGLCD.fillCircle(179, 220, 2);
+    myGLCD.fillCircle(169, 220, 2);
   } else if (ball.getMyPoint() == 5) {
     myGLCD.fillCircle(179, 230, 2);
     myGLCD.fillCircle(169, 230, 2);
-    myGLCD.fillCircle(179, 225, 2);
-    myGLCD.fillCircle(169, 225, 2);
     myGLCD.fillCircle(179, 220, 2);
+    myGLCD.fillCircle(169, 220, 2);
+    myGLCD.fillCircle(179, 210, 2);
   } else if (ball.getMyPoint() == 6) {
     myGLCD.fillCircle(179, 230, 2);
     myGLCD.fillCircle(169, 230, 2);
-    myGLCD.fillCircle(179, 225, 2);
-    myGLCD.fillCircle(169, 225, 2);
     myGLCD.fillCircle(179, 220, 2);
     myGLCD.fillCircle(169, 220, 2);
+    myGLCD.fillCircle(179, 210, 2);
+    myGLCD.fillCircle(169, 210, 2);
   } else if (ball.getMyPoint() == 7) {
     this->theEnd(myGLCD, ball);
   }
@@ -91,7 +95,7 @@ void Field::theEnd(UTFT& myGLCD, Ball& ball) {
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 255, 255);
   }
-  delay(1000);
+  delay(2000);
   ball.setMyPoint(0);
   ball.setEnemyPoint(0);
   myGLCD.clrScr();

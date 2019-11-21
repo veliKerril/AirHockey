@@ -13,10 +13,10 @@ void EnemyPlat::Move() {
   }
   
   if (right) {
-    y += 80;
+    y += 10;
   }
   else {
-    y -= 80;
+    y -= 10;
   }
   
 }
