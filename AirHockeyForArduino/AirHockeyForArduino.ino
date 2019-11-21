@@ -29,34 +29,46 @@ const int tsMinX   = 210;                              // соответству
 const int tsMinY   = 205;                              // соответствующий точке начала координат по оси Y
 const int tsMaxX   = 930;                              // соответствующий максимальной точке координат по оси X
 const int tsMaxY   = 915;                              // соответствующий максимальной точке координат по оси Y
-const int mipPress = 0;                                // соответствующий минимальной степени нажатия на TouchScreen
+const int mipPress = 1;                                // соответствующий минимальной степени нажатия на TouchScreen
 const int maxPress = 1000;                             // соответствующий максимальной степени нажатия на TouchScreen
 
-//Создаём объекты библиотек:
-UTFT        myGLCD(TFT28UNO, RS, WR, CS, RST, SER);    // Создаём объект для работы с дисплеем
-TouchScreen ts     = TouchScreen(XP, YP, XM, YM);      // Создаём объект для работы с TouchScreen
+//Создаём объект для работы с дисплеем
+UTFT myGLCD(TFT28UNO, RS, WR, CS, RST, SER);
+//Создаём объект для работы с TouchScreen
+TouchScreen ts = TouchScreen(XP, YP, XM, YM);
+
+Field field;
+Ball ball;
+MyPlat myPlat;
+EnemyPlat enemyPlat;
+
 
 void setup(void){
     Serial.begin(9600);                                    // Инициируем передачу данных в монитор последовательного порта на скорости 9600 бит/сек
     myGLCD.InitLCD();                                      // Инициируем работу с TFT дисплеем    
     myGLCD.clrScr();                                       // Чистим экран дисплея
-    
+    /*myGLCD.setColor(175, 175, 175);
+    myGLCD.fillRect(50, 0, 319, 4);
+    myGLCD.fillRect(50, 5, 54, 75);
+    myGLCD.fillRect(50, 160, 54, 235);
+    myGLCD.fillRect(50, 236, 319, 240);
+    myGLCD.fillRect(316, 5, 319, 75);
+    myGLCD.fillRect(316, 160, 319, 235);
+    myGLCD.setColor(255, 255, 255);*/
 }
 
+  
+  
 void loop(){                                               
     //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
     TSPoint p = ts.getPoint();
     
     //Возвращаем режим работы выводов.
-    // Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
+    //Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
     pinMode(XM, OUTPUT);
-    // Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
+    //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
     pinMode(YP, OUTPUT);
-    Ball ball;
-    Field field;
-    MyPlat myPlat;
-    EnemyPlat enemyPlat;
-    
+
     field.push(myGLCD);
     myPlat.push(p, myGLCD);
     enemyPlat.push(myGLCD);

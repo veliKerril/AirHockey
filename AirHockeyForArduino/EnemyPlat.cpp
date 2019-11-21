@@ -3,15 +3,25 @@
 #include <TouchScreen.h>
 
 EnemyPlat::EnemyPlat() {
-
+  this->setX(300);
+  this->setY(120);  
 }
 
-void EnemyPlat::Move() {
-
+void EnemyPlat::Move() {  
+  if ((y > 200) || (y < 40)) {
+    right = (right + 1) % 2;
+  }
+  
+  if (right) {
+    y += 80;
+  }
+  else {
+    y -= 80;
+  }
+  
 }
 
 void EnemyPlat::push(UTFT& myGLCD) {
-	this->x = 300;
-  this->y = 120;
+  this->Move();
   this->draw(myGLCD);
 }

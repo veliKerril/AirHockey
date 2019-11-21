@@ -3,7 +3,8 @@
 #include <TouchScreen.h>
 
 MyPlat::MyPlat() {
-
+  this->setX(20);
+  this->setY(120);
 }
 
 void MyPlat::Move() {

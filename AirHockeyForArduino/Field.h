@@ -2,10 +2,10 @@
 #include <UTFT.h>
 
 class Field {
-public:
-	//Change drawing of the field
-	void push(UTFT&);
+private:
+  void draw(UTFT&);
 
-	//Visualization of the field
-	void draw(UTFT&);
+  
+public:
+	void push(UTFT&);
 };

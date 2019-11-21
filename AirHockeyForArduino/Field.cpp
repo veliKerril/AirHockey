@@ -6,10 +6,11 @@ void Field::push(UTFT& myGLCD) {
 }
 
 void Field::draw(UTFT& myGLCD) {
-	myGLCD.fillRect(0, 0, 319, 5);
-  myGLCD.fillRect(0, 6, 5, 75);
-  myGLCD.fillRect(0, 160, 5, 234);
-  myGLCD.fillRect(0, 235, 319, 240);
-  myGLCD.fillRect(315, 6, 319, 75);
-  myGLCD.fillRect(315, 160, 319, 234);
+    myGLCD.fillRect(50, 0, 319, 4);
+    myGLCD.fillRect(50, 5, 54, 75);
+    myGLCD.fillRect(50, 160, 54, 235);
+    myGLCD.fillRect(50, 236, 319, 240);
+    myGLCD.fillRect(316, 5, 319, 75);
+    myGLCD.fillRect(316, 160, 319, 235);
+    myGLCD.fillRect(184, 5, 186, 235);
 }

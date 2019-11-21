@@ -4,14 +4,11 @@
 #include <TouchScreen.h>
 
 class EnemyPlat : public Plat {
+private:
+  int right = 1;
 public:
-	//Start enemy platform's parameters
 	EnemyPlat();
-
-	//Responsible for moving enemy platform
 	void Move();
-
-	//Change drawing of the platform
 	void push(UTFT& myGLCD);
 
 };

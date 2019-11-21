@@ -13,18 +13,24 @@ double Plat::getY() const {
 }
 
 void Plat::setX(const TSPoint p) {
-	this->x = p.x + 100;
+	this->x = p.x - 100;
 }
 void Plat::setY(const TSPoint p) {
-	/*Check deadline*/
-	this->y = -p.y;
+	this->y = -p.y + 600;
 }
 
-//Draw the rect for plat
+void Plat::setX(double x) {
+  this->x = x;
+}
+void Plat::setY(double y) {
+  this->y = y;
+}
+
 void Plat::draw(UTFT& myGLCD) {
 	myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
-  delay(20);
+  delay(10);
   myGLCD.setColor(0, 0, 0);
   myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
-  myGLCD.setColor(255, 255, 255);
+  myGLCD.setColor(225, 225, 225);
+  
 }
