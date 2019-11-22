@@ -119,15 +119,23 @@
     <ClCompile Include="EnemyPlat.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyPlat.cpp" />
+    <ClCompile Include="Name.cpp" />
     <ClCompile Include="Plat.cpp" />
+    <ClCompile Include="Set.cpp" />
+    <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="EnemyPlat.h" />
     <ClInclude Include="Field.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="MyPlat.h" />
+    <ClInclude Include="Name.h" />
     <ClInclude Include="Plat.h" />
+    <ClInclude Include="Set.h" />
+    <ClInclude Include="Table.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

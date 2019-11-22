@@ -1,28 +1,12 @@
-
 #include "Ball.h"
 #include "MyPlat.h"
 #include "EnemyPlat.h"
+#include "Set.h"
 #include <UTFT.h>
 #include <TouchScreen.h>
 
 Ball::Ball() {
 	this->startMy();
-}
-
-double Ball::getX() const {
-	return this->x;
-}
-
- double Ball::getY() const {
-	return this->y;
-}
-
-void Ball::setX(double x) {
-	this->x = x;
-}
-
-void Ball::setY(double y) {
-	this->x = y;
 }
 
 void Ball::setMyPoint(int myPoint) {
@@ -33,15 +17,15 @@ void Ball::setEnemyPoint(int enemyPoint) {
   this->enemyPoint = enemyPoint;
 }
 
-void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
-  this->tr(myPlat, enemyPlat);
-	this->draw(myGLCD);
+void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set) {
+  this->tr(myPlat, enemyPlat, set);
+	this->draw(myGLCD, set);
 }
 
 
 
 
-void Ball::tr(const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
+void Ball::tr(const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set) {
 	if (   (((x - 15) <=  (myPlat.getX() + 2)) && ((x + 15) >=  (myPlat.getX() - 2)) && (y <=  myPlat.getY() + 20) && (y >=  myPlat.getY() - 20)) // от моей платформы
 	    || (((x - 5) <= 55) && ((y >= 160)||(y <= 75))) // от моего дна
 	    || ((x + 15) >=  (enemyPlat.getX() - 2) && ((x - 15) <=  (enemyPlat.getX() + 2)) && (y <= enemyPlat.getY() + 20) && (y >= enemyPlat.getY() - 20)) // от вражеской платформы
@@ -55,15 +39,15 @@ void Ball::tr(const MyPlat& myPlat, const EnemyPlat& enemyPlat) {
   
   
   if (up) {
-    x += 5;
+    x += set.speedOfBall;
   } else {
-    x -= 5;
+    x -= set.speedOfBall;
   }
 
   if (right) {
-    y += 5;
+    y += set.speedOfBall;
   } else {
-    y -= 5;
+    y -= set.speedOfBall;
   }
 
   if (((x - 5) < 50) && (y > 75) && (y < 160)) {
@@ -91,8 +75,8 @@ void Ball::startEn() {
   y = 120;
 }
 
-void Ball::draw(UTFT& myGLCD) {
-  myGLCD.fillCircle(x, y, 5);
+void Ball::draw(UTFT& myGLCD, Set set) {
+  myGLCD.fillCircle(x, y, set.sizeOfBall);
   delay(10);
   myGLCD.setColor(0, 0, 0);
   myGLCD.fillCircle(x, y, 6);
@@ -106,18 +90,3 @@ int Ball::getMyPoint() const {
 int Ball::getEnemyPoint() const {
   return enemyPoint;
 }
-
-
-
-
-
-
-
-
-
-/*Serial.println(myPlat.getX() + 2);
-  Serial.println(x + 5);
-  Serial.println(enemyPlat.getX() - 2);
-  Serial.println(up);
-  delay(500);
-  Serial.println(' ');*/

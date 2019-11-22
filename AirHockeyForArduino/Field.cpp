@@ -1,13 +1,14 @@
 #include "Field.h"
 #include <UTFT.h>
 #include "Ball.h"
+#include "Name.h"
 
-void Field::push(UTFT& myGLCD, Ball& ball) {
-	this->draw(myGLCD);
-  this->count(myGLCD, ball);
+void Field::push(UTFT& myGLCD, Ball& ball, Name name) {
+	this->draw(myGLCD, name);
+  this->count(myGLCD, ball, name);
 }
 
-void Field::draw(UTFT& myGLCD) {
+void Field::draw(UTFT& myGLCD, Name name) {
     myGLCD.fillRect(50, 0, 319, 4);
     myGLCD.fillRect(50, 5, 54, 75);
     myGLCD.fillRect(50, 160, 54, 235);
@@ -18,10 +19,18 @@ void Field::draw(UTFT& myGLCD) {
     myGLCD.setColor(0, 0, 0);
     myGLCD.fillRect(312, 76, 319, 159);
     myGLCD.fillRect(310, 5, 315, 234);
+    myGLCD.drawLine(0, 0, 0, 240);
     myGLCD.setColor(255, 255, 255);
+    if (name.nameOf == 1) {
+      myGLCD.drawLine(5, 5, 15, 15);
+    } else if (name.nameOf == 2) {
+      myGLCD.drawRect(5, 5, 15, 15);
+    } else {
+      myGLCD.drawCircle(10, 10, 5);
+    }
 }
 
-void Field::count(UTFT& myGLCD, Ball& ball) {
+void Field::count(UTFT& myGLCD, Ball& ball, Name name) {
   if (ball.getEnemyPoint() == 1) {
     myGLCD.fillCircle(191, 230, 2);
   } else if (ball.getEnemyPoint() == 2) {
@@ -50,7 +59,7 @@ void Field::count(UTFT& myGLCD, Ball& ball) {
     myGLCD.fillCircle(191, 210, 2);
     myGLCD.fillCircle(201, 210, 2);
   } else if (ball.getEnemyPoint() == 7) {
-    this->theEnd(myGLCD, ball);
+    this->theEnd(myGLCD, ball, name);
   }
 
   if (ball.getMyPoint() == 1) {
@@ -81,15 +90,22 @@ void Field::count(UTFT& myGLCD, Ball& ball) {
     myGLCD.fillCircle(179, 210, 2);
     myGLCD.fillCircle(169, 210, 2);
   } else if (ball.getMyPoint() == 7) {
-    this->theEnd(myGLCD, ball);
+    this->theEnd(myGLCD, ball, name);
   }
 }
 
-void Field::theEnd(UTFT& myGLCD, Ball& ball) {
+void Field::theEnd(UTFT& myGLCD, Ball& ball, Name name) {
   if (ball.getMyPoint() == 7) {
     myGLCD.setColor(0, 255, 0);
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 255, 255);
+    if (name.nameOf == 1) {
+      EEPROM.write(5, ball.getMyPoint() - ball.getEnemyPoint());
+    } else if (name.nameOf == 2) {
+      EEPROM.write(6, ball.getMyPoint() - ball.getEnemyPoint());
+    } else {
+      EEPROM.write(7, 0);
+    }
   } else {
     myGLCD.setColor(255, 0, 0);
     myGLCD.fillRect(0, 0, 319, 240);

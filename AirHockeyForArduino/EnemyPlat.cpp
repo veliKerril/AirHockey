@@ -1,27 +1,28 @@
 #include "EnemyPlat.h"
+#include "Set.h"
 #include <UTFT.h>
 #include <TouchScreen.h>
 
 EnemyPlat::EnemyPlat() {
-  this->setX(300);
-  this->setY(120);  
+  x = 300;
+  y = 120;  
 }
 
-void EnemyPlat::Move() {  
+void EnemyPlat::Move(Set set) {  
   if ((y > 200) || (y < 40)) {
     right = (right + 1) % 2;
   }
   
   if (right) {
-    y += 10;
+    y += set.speedOfEnemyPlatform;
   }
   else {
-    y -= 10;
+    y -= set.speedOfEnemyPlatform;
   }
   
 }
 
-void EnemyPlat::push(UTFT& myGLCD) {
-  this->Move();
+void EnemyPlat::push(UTFT& myGLCD, Set set) {
+  this->Move(set);
   this->draw(myGLCD);
 }

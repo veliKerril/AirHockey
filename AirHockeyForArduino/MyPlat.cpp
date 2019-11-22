@@ -2,19 +2,19 @@
 #include <UTFT.h>
 #include <TouchScreen.h>
 
-MyPlat::MyPlat() {
-  this->setX(70);
-  this->setY(120);
-}
-
-void MyPlat::Move() {
-
-}
-
 void MyPlat::push(const TSPoint p, UTFT& myGLCD) {
-  /*if(p.z > 0) { 
+  this->setX(p);
+  this->setY(p);
+	this->draw(myGLCD);
+}
+
+
+
+
+
+ /*if(p.z > 0) { 
     if (this->x <= p.x - 200) {
-	    this->setXplus();
+     this->setXplus();
     } else {
       this->setXminus();
     }
@@ -24,7 +24,3 @@ void MyPlat::push(const TSPoint p, UTFT& myGLCD) {
       this->setYminus();
     }
   }*/
-  this->setX(p);
-  this->setY(p);
-	this->draw(myGLCD);
-}

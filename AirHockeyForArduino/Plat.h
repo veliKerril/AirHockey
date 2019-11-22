@@ -6,18 +6,22 @@ class Plat {
 protected:
 	double x;
 	double y;
-
+  void draw(UTFT&);
+  void setX(const TSPoint);
+  void setY(const TSPoint);
+  
 public:
 	Plat();
 	double getX() const;
 	double getY() const;
-	void setX(const TSPoint);
-	void setY(const TSPoint);
-  void setX(double);
+};
+
+
+
+
+/*void setX(double);
   void setY(double);
   void setXplus();
   void setXminus();
   void setYplus();
-  void setYminus();
-	void draw(UTFT&);
-};
+  void setYminus();*/

@@ -1,17 +1,17 @@
-//  Данный скетч демонстрирует работу TouchScreen на примере дисплея 2.8 TFT 320x240 UNO http://iarduino.ru/shop/Displei/cvetnoy-graficheskiy-displey-2-8-tft-320x240-uno-sensornyy.html
-//  Дисплей выполнен в виде модуля для установки на Arduino UNO                          http://iarduino.ru/shop/arduino/arduino-uno-r3.html
-//  Для вывода точек касания используется библиотека UTFT                                http://iarduino.ru/file/54.html
-//  Подробное описание работы с сенсорными экранами (TouchScreen) находится по ссылке    http://wiki.iarduino.ru/page/rabota-s-touchscreen/
-//  Подробное описание работы с TFT цветными графическими дисплеями находится по ссылке  http://wiki.iarduino.ru/page/rabota-s-cvetnym-graficheskim-displeem/
-
 #include <UTFT.h>
 #include <TouchScreen.h>
+#include <EEPROM.h>
 #include "Ball.h"
 #include "Plat.h"
 #include "MyPlat.h"
 #include "EnemyPlat.h"
 #include "Field.h"
-    
+#include "Menu.h"
+#include "Name.h"
+#include "Table.h"
+#include "Set.h"
+
+
 //Определяем выводы используемые для управления дисплеем 2.8" TFT 320x240 UNO:
 const uint8_t RS   = A2;                               // 
 const uint8_t WR   = A1;                               // 
@@ -23,61 +23,187 @@ const uint8_t YP   = A2;                               // Вывод Y+ долж
 const uint8_t XM   = A3;                               // Вывод X- должен быть подключен к аналоговому входу
 const uint8_t YM   = 8;                                // Вывод Y-
 const uint8_t XP   = 9;                                // Вывод X+
-    
-//Определяем экстремумы для значений считываемых с аналоговых входов при определении точек нажатия на TouchScreen:
-const int tsMinX   = 210;                              // соответствующий точке начала координат по оси X
-const int tsMinY   = 205;                              // соответствующий точке начала координат по оси Y
-const int tsMaxX   = 930;                              // соответствующий максимальной точке координат по оси X
-const int tsMaxY   = 915;                              // соответствующий максимальной точке координат по оси Y
-const int mipPress = 1;                                // соответствующий минимальной степени нажатия на TouchScreen
-const int maxPress = 1000;                             // соответствующий максимальной степени нажатия на TouchScreen
 
 //Создаём объект для работы с дисплеем
 UTFT myGLCD(TFT28UNO, RS, WR, CS, RST, SER);
 //Создаём объект для работы с TouchScreen
 TouchScreen ts = TouchScreen(XP, YP, XM, YM);
 
+Menu menu;
+Name name;
+Table table;
+Set set;
 Field field;
 Ball ball;
 MyPlat myPlat;
 EnemyPlat enemyPlat;
 
-
 void setup(void){
-    Serial.begin(9600);                                    // Инициируем передачу данных в монитор последовательного порта на скорости 9600 бит/сек
-    myGLCD.InitLCD();                                      // Инициируем работу с TFT дисплеем    
-    myGLCD.clrScr();                                       // Чистим экран дисплея
-}
+    // Инициируем передачу данных в монитор последовательного порта на скорости 9600 бит/сек
+    Serial.begin(9600);
+    // Инициируем работу с TFT дисплеем
+    myGLCD.InitLCD();
+    // Чистим экран дисплея
+    myGLCD.clrScr();
 
-  
+    myGLCD.setColor(226, 87, 30);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(255, 127, 0);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(255, 255, 0);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(150, 191, 51);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(0, 0, 255);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(75, 0, 130);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(139, 0, 255);
+    myGLCD.fillRect(0, 0, 319, 240);
+    delay(1500);
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect(0, 0, 319, 240);
+    myGLCD.setColor(255, 255, 255);
+    
+    while (true)
+    {
+      TSPoint p = ts.getPoint();
+      pinMode(XM, OUTPUT);
+      pinMode(YP, OUTPUT);
+      menu.draw(myGLCD);
+      if (p.z > 5)
+      {
+        if ((p.x - 180 > 340)&& (-p.y + 875 > 320))
+        {
+          myGLCD.clrScr();
+          while (true)
+          {
+            TSPoint p1 = ts.getPoint();
+            pinMode(XM, OUTPUT);
+            pinMode(YP, OUTPUT);
+            name.draw(myGLCD);
+            if (p1.z > 5)
+            {
+              if (-p1.y + 875 < 200) {
+                name.nameOf = 1;
+                EEPROM.write(4, 1);
+                name.picture1(myGLCD);
+                myGLCD.clrScr();
+                break;
+              } else if ((-p1.y + 875 > 200) && (-p1.y + 875 < 500)) {
+                name.nameOf = 2;
+                EEPROM.write(4, 2);
+                name.picture2(myGLCD);
+                myGLCD.clrScr();
+                break;
+              } else {
+                name.nameOf = 3;
+                EEPROM.write(4, 3);
+                name.picture3(myGLCD);
+                myGLCD.clrScr();
+                break;
+              }
+            }
+          }
+        }
+        
+        if ((p.x - 180 < 340) && (-p.y + 875 < 320)) {
+          myGLCD.clrScr();
+          table.draw(myGLCD);
+          delay(5000);
+          myGLCD.clrScr();
+        }
+        
+        if ((p.x - 180 < 340) && (-p.y + 875 > 320)) {
+          myGLCD.clrScr();
+          while (true)
+          {
+            TSPoint p2 = ts.getPoint();
+            pinMode(XM, OUTPUT);
+            pinMode(YP, OUTPUT);
+            set.draw(myGLCD);
+            if (p2.z > 5)
+            {
+              if (p2.x - 180 > 340) {
+                if ((-p2.y + 875 < 200) ) {
+                  set.speedOfBall = 5;
+                  EEPROM.write(1, 5);
+                  set.speedOfEnemyPlatform = 10;
+                  EEPROM.write(2, 10);
+                  set.picture1(myGLCD);
+                  myGLCD.clrScr();
+                  break;
+                } else if ((-p2.y + 875 > 200) && (-p2.y + 875 < 500)) {
+                  set.speedOfBall = 5;
+                  EEPROM.write(1, 5);
+                  set.speedOfEnemyPlatform = 20;
+                  EEPROM.write(2, 20);
+                  set.picture2(myGLCD);
+                  myGLCD.clrScr();
+                  break;
+                } else{
+                  set.speedOfBall = 10;
+                  EEPROM.write(1, 10);
+                  set.speedOfEnemyPlatform = 30;
+                  EEPROM.write(2, 30);
+                  set.picture3(myGLCD);
+                  myGLCD.clrScr();
+                  break;
+                }
+                } else {
+                  if (-p2.y + 875 < 200) {
+                    set.sizeOfBall = 3;
+                    EEPROM.write(3, 3);
+                    set.picture4(myGLCD);
+                    myGLCD.clrScr();
+                    break;
+                  } else if ((-p2.y + 875 > 200) && (-p2.y + 875 < 500)) {
+                    set.sizeOfBall = 4;
+                    EEPROM.write(3, 4);
+                    set.picture5(myGLCD);
+                    myGLCD.clrScr();
+                    break;
+                  } else {
+                    set.sizeOfBall = 5;
+                    EEPROM.write(3, 5);
+                    set.picture6(myGLCD);
+                    myGLCD.clrScr();
+                    break;
+                  }
+              }
+            }
+          }
+        }
+        
+        if ((p.x - 180 > 340) && (-p.y + 875 < 320)) {
+          myGLCD.clrScr();
+          break;
+        }
+      }
+    }
+}
   
 void loop(){                                               
-    //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
-    TSPoint p = ts.getPoint();
-    
-    //Возвращаем режим работы выводов.
-    //Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
-    pinMode(XM, OUTPUT);
-    //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
-    pinMode(YP, OUTPUT);
+  //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
+  TSPoint p = ts.getPoint();
 
-    field.push(myGLCD, ball);
-    myPlat.push(p, myGLCD);
-    enemyPlat.push(myGLCD);
-    ball.push(myGLCD, myPlat, enemyPlat);
+  //Возвращаем режим работы выводов.
+  //Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
+  pinMode(XM, OUTPUT);
+  //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
+  pinMode(YP, OUTPUT);
+  
+  field.push(myGLCD, ball, name);
+  myPlat.push(p, myGLCD);
+  enemyPlat.push(myGLCD, set);
+  ball.push(myGLCD, myPlat, enemyPlat, set);
 }
 
-/*myGLCD.setColor(255, 255, 255);
-  myGLCD.fillCircle(310, 230, 10);*/
-/*//  Если зафиксировано нажатие на TouchScreen, то ...
-    if(p.z>mipPress && p.z<maxPress){                      // Если степень нажатия достаточна для фиксации координат TouchScreen
-//      Выводим «сырые» показания TouchScreen:
-/////// Serial.println((String) "X="+p.x+",\tY="+p.y);
-//      Преобразуем значения полученные с TouchScreen в координаты дисплея:
-        p.x = map(p.x, tsMinX, tsMaxX, 0, 320);            // Преобразуем значение p.x от диапазона tsMinX...tsMaxX, к диапазону 0...320
-        p.y = map(-p.y - 500, tsMinY, tsMaxY, 0, 240);     // Преобразуем значение p.y от диапазона tsMinY...tsMaxY, к диапазону 0...240
-//      Выводим преобразованные показания TouchScreen:
-/////// Serial.println((String) "("+p.x+","+p.y+")");
-//      Выводим точку на экране по координатам с TouchScreen:
-        myGLCD.fillCircle(p.x,p.y,3);                    // Прорисовываем окружность диаметром 3 пикселя с центром в точке координат считанных с TouchScreen
-    }*/
+
+/*EEPROM.write(1, 5);   //1 - скорость мяча
+  EEPROM.write(2, 10);  //2 - скорость платформы
+  EEPROM.write(3, 5);   //3 - размер мяча 
+  EEPROM.write(4, 1);   //4 - номер аккаунта
+  EEPROM.write(5, 0);   //5 - счет первого аккаунта
+  EEPROM.write(6, 0);   //6 - счет второго аккаунта
+  EEPROM.write(7, 0);   //7 - счет третьего аккаунта*/
