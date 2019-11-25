@@ -15,13 +15,3 @@ public:
 	double getX() const;
 	double getY() const;
 };
-
-
-
-
-/*void setX(double);
-  void setY(double);
-  void setXplus();
-  void setXminus();
-  void setYplus();
-  void setYminus();*/
