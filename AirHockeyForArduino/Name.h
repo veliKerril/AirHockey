@@ -6,9 +6,6 @@
 class Name {
 private:
 public:
+  char* nameOf = new char[4] {EEPROM.read(5), EEPROM.read(6), EEPROM.read(7)};
   void draw(UTFT&);
-  int nameOf = EEPROM.read(4);;
-  void picture1(UTFT&);
-  void picture2(UTFT&);
-  void picture3(UTFT&);
 };

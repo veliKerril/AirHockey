@@ -2,6 +2,7 @@
 #include "MyPlat.h"
 #include "EnemyPlat.h"
 #include "Set.h"
+#include "Name.h"
 #include <UTFT.h>
 #include <TouchScreen.h>
 
@@ -17,15 +18,15 @@ void Ball::setEnemyPoint(int enemyPoint) {
   this->enemyPoint = enemyPoint;
 }
 
-void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set) {
-  this->tr(myGLCD, myPlat, enemyPlat, set);
+void Ball::push(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set, Name name) {
+  this->tr(myGLCD, myPlat, enemyPlat, set, name);
 	this->draw(myGLCD, set);
 }
 
 
 
 
-void Ball::tr(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set) {
+void Ball::tr(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Set set, Name name) {
 	if (   (((x - 15) <=  (myPlat.getX() + 2)) && ((x + 15) >=  (myPlat.getX() - 2)) && (y <=  myPlat.getY() + 20) && (y >=  myPlat.getY() - 20)) // от моей платформы
 	    || (((x - 5) <= 55) && ((y >= 160)||(y <= 75))) // от моего дна
 	    || ((x + 15) >=  (enemyPlat.getX() - 2) && ((x - 15) <=  (enemyPlat.getX() + 2)) && (y <= enemyPlat.getY() + 20) && (y >= enemyPlat.getY() - 20)) // от вражеской платформы
@@ -64,9 +65,10 @@ void Ball::tr(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Se
     myGLCD.drawLine(0, 0, 0, 240);
     myGLCD.fillRect(187, 5, 295, 55);
     myGLCD.fillRect(55, 5, 183, 55);
-    myGLCD.fillRect(16, 0, 49, 55);
+    myGLCD.fillRect(21, 0, 49, 55);
     myGLCD.fillRect(50, 76, 69, 159);
     myGLCD.setColor(255, 255, 255);
+    myGLCD.print(name.nameOf, 20, 4, 90);
     delay(1000);
   }
 
@@ -80,9 +82,10 @@ void Ball::tr(UTFT& myGLCD, const MyPlat& myPlat, const EnemyPlat& enemyPlat, Se
     myGLCD.drawLine(0, 0, 0, 240);
     myGLCD.fillRect(187, 5, 295, 55);
     myGLCD.fillRect(55, 5, 183, 55);
-    myGLCD.fillRect(16, 0, 49, 55);
+    myGLCD.fillRect(21, 0, 49, 55);
     myGLCD.fillRect(50, 76, 69, 159);
     myGLCD.setColor(255, 255, 255);
+    myGLCD.print(name.nameOf, 20, 4, 90);
     delay(1000);
   }
 }

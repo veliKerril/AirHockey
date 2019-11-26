@@ -11,6 +11,8 @@
 #include "Table.h"
 #include "Set.h"
 
+extern uint8_t BigFont[];
+extern uint8_t SmallFont[];
 
 //Определяем выводы используемые для управления дисплеем 2.8" TFT 320x240 UNO:
 const uint8_t RS   = A2;                               // 
@@ -37,12 +39,16 @@ Field field;
 Ball ball;
 MyPlat myPlat;
 EnemyPlat enemyPlat;
+int flag = 1;
+
+
 
 void setup(void){
     // Инициируем передачу данных в монитор последовательного порта на скорости 9600 бит/сек
     Serial.begin(9600);
     // Инициируем работу с TFT дисплеем
     myGLCD.InitLCD();
+    myGLCD.setFont(BigFont);
     // Чистим экран дисплея
     myGLCD.clrScr();
 
@@ -64,8 +70,6 @@ void setup(void){
     myGLCD.setColor(0, 0, 0);
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 255, 255);*/
-    
-   
 }
   
 void loop(){
@@ -81,32 +85,47 @@ void loop(){
         if ((p.x - 180 > 340)&& (-p.y + 875 > 320))
         {
           myGLCD.clrScr();
+          int i = 0;
           while (true)
           {
             TSPoint p1 = ts.getPoint();
             pinMode(XM, OUTPUT);
             pinMode(YP, OUTPUT);
             name.draw(myGLCD);
-            if (p1.z > 5)
+            if (flag == 1) {
+              myGLCD.drawLine(120, 100, 140, 100);
+            }
+            myGLCD.print(name.nameOf, 100, 98, 90);
+            if (p1.z > 1)
             {
               if (-p1.y + 875 < 200) {
-                name.nameOf = 1;
-                EEPROM.write(4, 1);
-                name.picture1(myGLCD);
-                myGLCD.clrScr();
-                break;
+                EEPROM.write(i + 5, name.nameOf[i] + 1);
+                name.nameOf[i]++;
+                myGLCD.print(name.nameOf, 100, 98, 90);
               } else if ((-p1.y + 875 > 200) && (-p1.y + 875 < 500)) {
-                name.nameOf = 2;
-                EEPROM.write(4, 2);
-                name.picture2(myGLCD);
-                myGLCD.clrScr();
-                break;
-              } else {
-                name.nameOf = 3;
-                EEPROM.write(4, 3);
-                name.picture3(myGLCD);
-                myGLCD.clrScr();
-                break;
+                flag = 0;
+                i++;
+                if (i == 1) {
+                  myGLCD.setColor(0, 0, 0);
+                  myGLCD.drawLine(120, 100, 140, 100);
+                  myGLCD.setColor(255, 255, 255);
+                  myGLCD.drawLine(120, 120, 140, 120);
+                } else {
+                  myGLCD.setColor(0, 0, 0);
+                  myGLCD.drawLine(120, 120, 140, 120);
+                  myGLCD.setColor(255, 255, 255);
+                  myGLCD.drawLine(120, 135, 140, 135);
+                }
+                if (i > 2) {
+                  myGLCD.clrScr();
+                  flag = 1;
+                  break;
+                }  
+              } 
+               else {
+                EEPROM.write(i + 5, name.nameOf[i] - 1);
+                name.nameOf[i]--;
+                myGLCD.print(name.nameOf, 100, 98, 90);
               }
             }
           }
@@ -187,6 +206,7 @@ void loop(){
       }
     }
 
+  myGLCD.print(name.nameOf, 20, 4, 90);
   while (true) {
     //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
     TSPoint p = ts.getPoint();
@@ -200,7 +220,7 @@ void loop(){
     field.push(myGLCD, ball, name);
     myPlat.push(p, myGLCD);
     enemyPlat.push(myGLCD, set);
-    ball.push(myGLCD, myPlat, enemyPlat, set);
+    ball.push(myGLCD, myPlat, enemyPlat, set, name);
 
     if ((p.x - 180 < 200 ) && (-p.y + 875 > 650)) {
       ball.enemyPoint = 0;
@@ -218,6 +238,6 @@ void loop(){
   EEPROM.write(2, 10);  //2 - скорость платформы
   EEPROM.write(3, 5);   //3 - размер мяча 
   EEPROM.write(4, 1);   //4 - номер аккаунта
-  EEPROM.write(5, 0);   //5 - счет первого аккаунта
-  EEPROM.write(6, 0);   //6 - счет второго аккаунта
-  EEPROM.write(7, 0);   //7 - счет третьего аккаунта*/
+  EEPROM.write(5, 'A');   //5 - первый символ имени
+  EEPROM.write(6, 'A');   //6 - второй символ имени
+  EEPROM.write(7, 'A');   //7 - третий символ имени*/

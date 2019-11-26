@@ -17,16 +17,9 @@ void Field::draw(UTFT& myGLCD, Name name) {
     myGLCD.fillRect(316, 160, 319, 235);
     myGLCD.fillRect(184, 5, 186, 235);
 
-    myGLCD.fillRect(5, 223, 25, 226);
-    myGLCD.fillRect(5, 232, 25, 235);
-    
-    if (name.nameOf == 1) {
-      myGLCD.drawLine(5, 5, 15, 15);
-    } else if (name.nameOf == 2) {
-      myGLCD.drawRect(5, 5, 15, 15);
-    } else {
-      myGLCD.drawCircle(10, 10, 5);
-    }
+    myGLCD.fillRect(5, 223, 20, 226);
+    myGLCD.fillRect(5, 232, 20, 235);
+
 }
 
 void Field::count(UTFT& myGLCD, Ball& ball, Name name) {
@@ -114,4 +107,5 @@ void Field::theEnd(UTFT& myGLCD, Ball& ball, Name name) {
   ball.setMyPoint(0);
   ball.setEnemyPoint(0);
   myGLCD.clrScr();
+  myGLCD.print(name.nameOf, 20, 4, 90);
 }
