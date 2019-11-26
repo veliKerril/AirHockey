@@ -2,8 +2,10 @@
 #include <UTFT.h>
 #include <TouchScreen.h>
 #include <EEPROM.h>
+#include "Name.h"
+
 
 class Table {
 public:
-  void draw(UTFT&);
+  void draw(UTFT&, Name);
 };

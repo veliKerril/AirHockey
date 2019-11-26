@@ -91,12 +91,40 @@ void Field::theEnd(UTFT& myGLCD, Ball& ball, Name name) {
     myGLCD.setColor(0, 255, 0);
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 255, 255);
-    if (name.nameOf == 1) {
-      EEPROM.write(5, ball.getMyPoint() - ball.getEnemyPoint());
-    } else if (name.nameOf == 2) {
-      EEPROM.write(6, ball.getMyPoint() - ball.getEnemyPoint());
-    } else {
-      EEPROM.write(7, 0);
+    int currentCount = ball.getMyPoint() - ball.getEnemyPoint();
+    if (currentCount >= EEPROM.read(8)) {
+      
+      EEPROM.write(16, EEPROM.read(12));
+      EEPROM.write(17, EEPROM.read(13));
+      EEPROM.write(18, EEPROM.read(14));
+      EEPROM.write(19, EEPROM.read(15));
+      
+      EEPROM.write(12, EEPROM.read(8));
+      EEPROM.write(13, EEPROM.read(9));
+      EEPROM.write(14, EEPROM.read(10));
+      EEPROM.write(15, EEPROM.read(10));
+      
+      EEPROM.write(8, currentCount);
+      EEPROM.write(9, EEPROM.read(5));
+      EEPROM.write(10, EEPROM.read(6));
+      EEPROM.write(11, EEPROM.read(7));
+      
+    } else if (currentCount >= EEPROM.read(12)) {
+      EEPROM.write(16, EEPROM.read(12));
+      EEPROM.write(17, EEPROM.read(13));
+      EEPROM.write(18, EEPROM.read(14));
+      EEPROM.write(19, EEPROM.read(15));
+      
+      EEPROM.write(12, currentCount);
+      EEPROM.write(13, EEPROM.read(5));
+      EEPROM.write(14, EEPROM.read(6));
+      EEPROM.write(15, EEPROM.read(7));
+      
+    } else if (currentCount >= EEPROM.read(16)) {
+      EEPROM.write(16, currentCount);
+      EEPROM.write(17, EEPROM.read(5));
+      EEPROM.write(18, EEPROM.read(6));
+      EEPROM.write(19, EEPROM.read(7));
     }
   } else {
     myGLCD.setColor(255, 0, 0);

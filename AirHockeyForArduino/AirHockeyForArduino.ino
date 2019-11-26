@@ -99,8 +99,8 @@ void loop(){
             if (p1.z > 1)
             {
               if (-p1.y + 875 < 200) {
-                EEPROM.write(i + 5, name.nameOf[i] + 1);
-                name.nameOf[i]++;
+                if ((name.nameOf[i] + 1) == '[') name.nameOf[i] = '@';
+                EEPROM.write(i + 5, ++name.nameOf[i]);
                 myGLCD.print(name.nameOf, 100, 98, 90);
               } else if ((-p1.y + 875 > 200) && (-p1.y + 875 < 500)) {
                 flag = 0;
@@ -123,8 +123,8 @@ void loop(){
                 }  
               } 
                else {
-                EEPROM.write(i + 5, name.nameOf[i] - 1);
-                name.nameOf[i]--;
+                if ((name.nameOf[i] - 1) == '@') name.nameOf[i] = '[';
+                EEPROM.write(i + 5, --name.nameOf[i]);
                 myGLCD.print(name.nameOf, 100, 98, 90);
               }
             }
@@ -133,7 +133,7 @@ void loop(){
         
         if ((p.x - 180 < 340) && (-p.y + 875 < 320)) {
           myGLCD.clrScr();
-          table.draw(myGLCD);
+          table.draw(myGLCD, name);
           delay(5000);
           myGLCD.clrScr();
         }
@@ -234,10 +234,22 @@ void loop(){
 }
 
 
-/*EEPROM.write(1, 5);   //1 - скорость мяча
-  EEPROM.write(2, 10);  //2 - скорость платформы
-  EEPROM.write(3, 5);   //3 - размер мяча 
-  EEPROM.write(4, 1);   //4 - номер аккаунта
-  EEPROM.write(5, 'A');   //5 - первый символ имени
-  EEPROM.write(6, 'A');   //6 - второй символ имени
-  EEPROM.write(7, 'A');   //7 - третий символ имени*/
+/*EEPROM.write(1, 5);     //1  - скорость мяча
+  EEPROM.write(2, 10);    //2  - скорость платформы
+  EEPROM.write(3, 5);     //3  - размер мяча 
+  EEPROM.write(4, 1);     //4  - номер аккаунта
+  EEPROM.write(5, 'A');   //5  - первый символ текущего имени
+  EEPROM.write(6, 'A');   //6  - второй символ текущего имени
+  EEPROM.write(7, 'A');   //7  - третий символ текущего имени
+  EEPROM.write(8, 0);     //8  - рекорд первого места
+  EEPROM.write(9, 'A');   //9  - первый символ первого места
+  EEPROM.write(10, 'A');  //10 - второй символ первого места
+  EEPROM.write(11, 'A');  //11 - третий символ первого места
+  EEPROM.write(12, 0);    //12 - рекорд второго места
+  EEPROM.write(13, 'A');  //13 - первый символ второго места
+  EEPROM.write(14, 'A');  //14 - второй символ второго места
+  EEPROM.write(15, 'A');  //15 - третий символ второго места
+  EEPROM.write(16, 0);    //16 - реорд третьего места
+  EEPROM.write(17, 'A');  //17 - первый символ третьего места
+  EEPROM.write(18, 'A');  //18 - второй символ третьего места
+  EEPROM.write(19, 'A');  //19 - третий символ третьего места*/
