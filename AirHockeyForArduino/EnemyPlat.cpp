@@ -4,19 +4,23 @@
 #include <TouchScreen.h>
 
 EnemyPlat::EnemyPlat() {
-  x = 300;
-  y = 120;  
+  prevX = 300;
+  prevY = 120;
+  x = prevX;
+  y = prevY;
 }
 
 void EnemyPlat::Move(Set set) {  
   if ((y > 200) || (y < 40)) {
     right = (right + 1) % 2;
   }
-  
+
   if (right) {
+    prevY = y;
     y += set.speedOfEnemyPlatform;
   }
   else {
+    prevY = y;
     y -= set.speedOfEnemyPlatform;
   }
   

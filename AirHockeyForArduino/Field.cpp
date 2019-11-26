@@ -16,11 +16,10 @@ void Field::draw(UTFT& myGLCD, Name name) {
     myGLCD.fillRect(316, 5, 319, 75);
     myGLCD.fillRect(316, 160, 319, 235);
     myGLCD.fillRect(184, 5, 186, 235);
-    myGLCD.setColor(0, 0, 0);
-    myGLCD.fillRect(312, 76, 319, 159);
-    myGLCD.fillRect(310, 5, 315, 234);
-    myGLCD.drawLine(0, 0, 0, 240);
-    myGLCD.setColor(255, 255, 255);
+
+    myGLCD.fillRect(5, 223, 25, 226);
+    myGLCD.fillRect(5, 232, 25, 235);
+    
     if (name.nameOf == 1) {
       myGLCD.drawLine(5, 5, 15, 15);
     } else if (name.nameOf == 2) {

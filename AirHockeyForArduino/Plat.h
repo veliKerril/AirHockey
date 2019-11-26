@@ -9,6 +9,8 @@ protected:
   void draw(UTFT&);
   void setX(const TSPoint);
   void setY(const TSPoint);
+  double prevX;
+  double prevY;
   
 public:
 	Plat();

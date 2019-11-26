@@ -9,13 +9,12 @@ class Ball {
 private:
 	double x;
 	double y;
+  double prevX;
+  double prevY;
   int up = 1;
   int right = 1;
-  int myPoint = 0;
-  int enemyPoint = 0;
   void draw(UTFT&, Set);
-  void tr(const MyPlat&, const EnemyPlat&, Set);
-  void startMy();
+  void tr(UTFT&, const MyPlat&, const EnemyPlat&, Set);
   void startEn();
   
 public:
@@ -25,4 +24,7 @@ public:
   int getMyPoint() const;
   int getEnemyPoint() const;
   void push(UTFT&, const MyPlat&, const EnemyPlat&, Set);
+  int myPoint = 0;
+  int enemyPoint = 0;
+  void startMy();
 };

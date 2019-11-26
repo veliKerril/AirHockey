@@ -20,11 +20,26 @@ void Plat::setY(const TSPoint p) {
 }
 
 void Plat::draw(UTFT& myGLCD) {
+  double rX = abs(x - prevX);
+  double rY = abs(y - prevY);
+  
+  if ((rX < 5) && (rY < 40)) {
 	myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
-  delay(10);
   myGLCD.setColor(0, 0, 0);
-  myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
+  myGLCD.fillRect(x - 2 - rX, y - 20 - rY, x - 2, y + 20 + rY);
+  myGLCD.fillRect(x + 2, y - 20 - rY, x + 2 + rX, y + 20 + rY);
+  myGLCD.fillRect(x - 2 - rX, y - 20 - rY, x + 2 + rX, y - 20);
+  myGLCD.fillRect(x - 2 - rX, y + 20, x + 2 + rX, y + 20 + rY);
   myGLCD.setColor(225, 225, 225);
+  delay(10);
+  } else {
+    myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
+    myGLCD.setColor(0, 0, 0);
+    myGLCD.fillRect(prevX - 2, prevY - 20, prevX + 2, prevY + 20);
+    myGLCD.setColor(225, 225, 225);
+    delay(10);
+  }
+  
 }
 
 

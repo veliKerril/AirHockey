@@ -46,7 +46,7 @@ void setup(void){
     // Чистим экран дисплея
     myGLCD.clrScr();
 
-    myGLCD.setColor(226, 87, 30);
+    /*myGLCD.setColor(226, 87, 30);
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 127, 0);
     myGLCD.fillRect(0, 0, 319, 240);
@@ -63,9 +63,14 @@ void setup(void){
     delay(1500);
     myGLCD.setColor(0, 0, 0);
     myGLCD.fillRect(0, 0, 319, 240);
-    myGLCD.setColor(255, 255, 255);
+    myGLCD.setColor(255, 255, 255);*/
     
-    while (true)
+   
+}
+  
+void loop(){
+
+   while (true)
     {
       TSPoint p = ts.getPoint();
       pinMode(XM, OUTPUT);
@@ -181,22 +186,31 @@ void setup(void){
         }
       }
     }
-}
-  
-void loop(){                                               
-  //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
-  TSPoint p = ts.getPoint();
 
-  //Возвращаем режим работы выводов.
-  //Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
-  pinMode(XM, OUTPUT);
-  //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
-  pinMode(YP, OUTPUT);
+  while (true) {
+    //Считываем показания с TouchScreen. Считываем координаты и интенсивность нажатия на TouchScreen в структуру p
+    TSPoint p = ts.getPoint();
+
+    //Возвращаем режим работы выводов.
+    //Возвращаем режим работы вывода X- в значение «выход» для работы с дисплеем
+    pinMode(XM, OUTPUT);
+    //Возвращаем режим работы вывода Y+ в значение «выход» для работы с дисплеем
+    pinMode(YP, OUTPUT);
   
-  field.push(myGLCD, ball, name);
-  myPlat.push(p, myGLCD);
-  enemyPlat.push(myGLCD, set);
-  ball.push(myGLCD, myPlat, enemyPlat, set);
+    field.push(myGLCD, ball, name);
+    myPlat.push(p, myGLCD);
+    enemyPlat.push(myGLCD, set);
+    ball.push(myGLCD, myPlat, enemyPlat, set);
+
+    if ((p.x - 180 < 200 ) && (-p.y + 875 > 650)) {
+      ball.enemyPoint = 0;
+      ball.myPoint = 0;
+      ball.startMy();
+      myGLCD.clrScr();
+      break;
+    }
+    
+  }
 }
 
 
