@@ -6,9 +6,10 @@
 #include "Set.h"
 
 class Menu {
-private:
-  
 public:
+  //Основная функция взаимодействия с loop()
   void push(const TSPoint, UTFT&, Name&, Table, Set&);
+
+  //Отрисовка элементов меню
   void draw(UTFT&);
 };

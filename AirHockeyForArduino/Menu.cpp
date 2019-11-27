@@ -12,7 +12,6 @@ void Menu::draw(UTFT& myGLCD) {
     myGLCD.drawLine(300, 10, 240, 105);
     myGLCD.drawLine(180, 10, 240, 105);
     
-    
     myGLCD.drawLine(180, 140, 300, 140);
     myGLCD.drawLine(300, 140, 180, 220);
     myGLCD.drawLine(180, 220, 300, 220);
@@ -30,6 +29,3 @@ void Menu::draw(UTFT& myGLCD) {
 void Menu::push(const TSPoint p, UTFT& myGLCD, Name& name, Table table, Set& set) {
   this->draw(myGLCD);
 }
-
-//p.x - 180
-//-p.y + 875

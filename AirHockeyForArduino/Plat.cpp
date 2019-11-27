@@ -12,9 +12,11 @@ double Plat::getY() const {
 	return this->y;
 }
 
+//Коллибровка входящей из нажатий на экран информации
 void Plat::setX(const TSPoint p) {
 	this->x = p.x - 100;
 }
+
 void Plat::setY(const TSPoint p) {
 	this->y = -p.y + 600;
 }
@@ -22,7 +24,8 @@ void Plat::setY(const TSPoint p) {
 void Plat::draw(UTFT& myGLCD) {
   double rX = abs(x - prevX);
   double rY = abs(y - prevY);
-  
+
+  //Именно этот алгоритм позволяет не мигать объектам при движении
   if ((rX < 5) && (rY < 40)) {
 	myGLCD.fillRect(x - 2, y - 20, x + 2, y + 20);
   myGLCD.setColor(0, 0, 0);
@@ -41,31 +44,3 @@ void Plat::draw(UTFT& myGLCD) {
   }
   
 }
-
-
-
-
-
-
-/*void Plat::setX(double x) {
-  this->x = x;
-}
-void Plat::setY(double y) {
-  this->y = y;
-}
-
-void Plat::setXplus() {
-  this->x += 15;
-}
-
-void Plat::setXminus() {
-  this->x -= 15;
-}
-
-void Plat::setYplus() {
-  this->y += 15;
-}
-
-void Plat::setYminus() {
-  this->y -= 15;
-}*/

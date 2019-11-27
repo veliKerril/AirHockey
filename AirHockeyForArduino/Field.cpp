@@ -3,25 +3,6 @@
 #include "Ball.h"
 #include "Name.h"
 
-void Field::push(UTFT& myGLCD, Ball& ball, Name name) {
-	this->draw(myGLCD, name);
-  this->count(myGLCD, ball, name);
-}
-
-void Field::draw(UTFT& myGLCD, Name name) {
-    myGLCD.fillRect(50, 0, 319, 4);
-    myGLCD.fillRect(50, 5, 54, 75);
-    myGLCD.fillRect(50, 160, 54, 235);
-    myGLCD.fillRect(50, 236, 319, 240);
-    myGLCD.fillRect(316, 5, 319, 75);
-    myGLCD.fillRect(316, 160, 319, 235);
-    myGLCD.fillRect(184, 5, 186, 235);
-
-    myGLCD.fillRect(5, 223, 20, 226);
-    myGLCD.fillRect(5, 232, 20, 235);
-
-}
-
 void Field::count(UTFT& myGLCD, Ball& ball, Name name) {
   if (ball.getEnemyPoint() == 1) {
     myGLCD.fillCircle(191, 230, 2);
@@ -87,6 +68,7 @@ void Field::count(UTFT& myGLCD, Ball& ball, Name name) {
 }
 
 void Field::theEnd(UTFT& myGLCD, Ball& ball, Name name) {
+  //Обработка выигранной партии
   if (ball.getMyPoint() == 7) {
     myGLCD.setColor(0, 255, 0);
     myGLCD.fillRect(0, 0, 319, 240);
@@ -126,14 +108,34 @@ void Field::theEnd(UTFT& myGLCD, Ball& ball, Name name) {
       EEPROM.write(18, EEPROM.read(6));
       EEPROM.write(19, EEPROM.read(7));
     }
+  //Обработка проигранной партии
   } else {
     myGLCD.setColor(255, 0, 0);
     myGLCD.fillRect(0, 0, 319, 240);
     myGLCD.setColor(255, 255, 255);
   }
   delay(2000);
+
   ball.setMyPoint(0);
   ball.setEnemyPoint(0);
   myGLCD.clrScr();
   myGLCD.print(name.nameOf, 20, 4, 90);
+}
+
+void Field::draw(UTFT& myGLCD, Name name) {
+    myGLCD.fillRect(50, 0, 319, 4);
+    myGLCD.fillRect(50, 5, 54, 75);
+    myGLCD.fillRect(50, 160, 54, 235);
+    myGLCD.fillRect(50, 236, 319, 240);
+    myGLCD.fillRect(316, 5, 319, 75);
+    myGLCD.fillRect(316, 160, 319, 235);
+    myGLCD.fillRect(184, 5, 186, 235);
+
+    myGLCD.fillRect(5, 223, 20, 226);
+    myGLCD.fillRect(5, 232, 20, 235);
+}
+
+void Field::push(UTFT& myGLCD, Ball& ball, Name name) {
+  this->draw(myGLCD, name);
+  this->count(myGLCD, ball, name);
 }
