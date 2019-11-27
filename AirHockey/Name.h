@@ -3,7 +3,7 @@
 #include <TouchScreen.h>
 #include <EEPROM.h>
 
-//Ввод имени
+//Ввод никнейма пользователи
 class Name {
 public:
   //Массив символов, хранящий введенное имя игрока

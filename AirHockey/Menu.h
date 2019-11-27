@@ -7,7 +7,7 @@
 
 class Menu {
 public:
-  //Основная функция взаимодействия с loop()
+  //Основной метод взаимодействия с loop()
   void push(const TSPoint, UTFT&, Name&, Table, Set&);
 
   //Отрисовка элементов меню

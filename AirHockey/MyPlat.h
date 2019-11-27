@@ -3,11 +3,11 @@
 #include <UTFT.h>
 #include <TouchScreen.h>
 
-//Моя платформа
+//Пользовательская платформа
 class MyPlat : public Plat {
 public:
   MyPlat();
 
-  //Основная функция взаимодействия с loop()
+  //Основной метод взаимодействия с loop()
 	void push(const TSPoint p, UTFT& myGLCD);
 };

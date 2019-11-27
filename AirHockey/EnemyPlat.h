@@ -16,6 +16,6 @@ private:
 public:
 	EnemyPlat();
 
-  //Основная функция взаимодействия с loop()
+  //Основной метод взаимодействия с loop()
 	void push(UTFT&, Set);
 };
